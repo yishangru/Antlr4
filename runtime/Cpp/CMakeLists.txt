@@ -40,7 +40,7 @@ if(CMAKE_VERSION VERSION_EQUAL "3.3.0" OR
 endif()
 
 if(CMAKE_SYSTEM_NAME MATCHES "Linux")
-  find_library(UUID_LIBRARY libuuid.so.1)
+  find_library(UUID_LIBRARY NAMES uuid)
 endif()
 if(APPLE)
   find_library(COREFOUNDATION_LIBRARY CoreFoundation)
@@ -127,6 +127,8 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang" AND ( CMAKE_SYSTEM_NAME MATCH
         if (NOT (TOOL_VERSION VERSION_GREATER 3.0.0 OR TOOL_VERSION VERSION_EQUAL 3.0.0))
             message(FATAL_ERROR "${PROJECT_NAME} requires em++ 3.0.0 or greater.")
         endif()
+        # add for test
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -stdlib=libc++")
     elseif(NOT (TOOL_VERSION VERSION_GREATER 4.2.1 OR TOOL_VERSION VERSION_EQUAL 4.2.1))
         message(FATAL_ERROR "${PROJECT_NAME} requires clang 4.2.1 or greater.")
     endif()

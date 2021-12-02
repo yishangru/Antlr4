@@ -76,7 +76,6 @@ else()
 endif()
 
 if(CMAKE_SYSTEM_NAME MATCHES "Linux")
-  find_library(UUID_LIBRARY libuuid.so.1)
   target_link_libraries(antlr4_static ${UUID_LIBRARY})
   target_link_libraries(antlr4_shared ${UUID_LIBRARY})
 elseif(APPLE)
