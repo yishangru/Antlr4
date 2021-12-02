@@ -118,17 +118,16 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang" AND ANDROID)
 elseif ("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang" AND APPLE)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -stdlib=libc++")
 elseif ("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang" AND ( CMAKE_SYSTEM_NAME MATCHES "Linux" OR CMAKE_SYSTEM_NAME MATCHES "FreeBSD") )    
-    # if compiler matches clang exactly
-    message("cmake tool as ${CMAKE_CXX_COMPILER}")  
-    if ("${CMAKE_CXX_COMPILER}" MATCHES "(C|c)lang\\+\\+$")
-      execute_process(
-        COMMAND ${CMAKE_CXX_COMPILER} -dumpversion OUTPUT_VARIABLE CLANG_VERSION)
-    else()
-      message("not match clang exactly, directly check clang++ version")
-      execute_process(
-        COMMAND clang++ -dumpversion OUTPUT_VARIABLE CLANG_VERSION)
-    endif()
-    if(NOT (CLANG_VERSION VERSION_GREATER 4.2.1 OR CLANG_VERSION VERSION_EQUAL 4.2.1))
+    # check if compiler matches em++
+    message("cxx compiler as ${CMAKE_CXX_COMPILER}")
+    execute_process(
+        COMMAND ${CMAKE_CXX_COMPILER} -dumpversion OUTPUT_VARIABLE TOOL_VERSION)
+    if ("${CMAKE_CXX_COMPILER}" MATCHES "em\\+\\+$")
+        message("compiler as em++, check em++ version")
+        if (NOT (TOOL_VERSION VERSION_GREATER 3.0.0 OR TOOL_VERSION VERSION_EQUAL 3.0.0))
+            message(FATAL_ERROR "${PROJECT_NAME} requires em++ 3.0.0 or greater.")
+        endif()
+    elseif(NOT (TOOL_VERSION VERSION_GREATER 4.2.1 OR TOOL_VERSION VERSION_EQUAL 4.2.1))
         message(FATAL_ERROR "${PROJECT_NAME} requires clang 4.2.1 or greater.")
     endif()
     # You can use libc++ to compile this project when g++ is NOT greater than or equal to 5.0.
