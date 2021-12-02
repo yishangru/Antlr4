@@ -40,7 +40,7 @@ if(CMAKE_VERSION VERSION_EQUAL "3.3.0" OR
 endif()
 
 if(CMAKE_SYSTEM_NAME MATCHES "Linux")
-  find_library(UUID_LIBRARY NAMES uuid PATHS /emsdk/upstream/emscripten/cache/sysroot/lib)
+  find_library(UUID_LIBRARY NAMES uuid PATHS /wasm-uuid/)
 endif()
 if(APPLE)
   find_library(COREFOUNDATION_LIBRARY CoreFoundation)
