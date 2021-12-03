@@ -128,7 +128,7 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang" AND ( CMAKE_SYSTEM_NAME MATCH
             message(FATAL_ERROR "${PROJECT_NAME} requires em++ 3.0.0 or greater.")
         endif()
         # add for test
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -pthread -s DISABLE_EXCEPTION_CATCHING=0 -fwasm-exceptions")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -pthread -s DISABLE_EXCEPTION_CATCHING=0 -fexceptions -fwasm-exceptions")
     elseif(NOT (TOOL_VERSION VERSION_GREATER 4.2.1 OR TOOL_VERSION VERSION_EQUAL 4.2.1))
         message(FATAL_ERROR "${PROJECT_NAME} requires clang 4.2.1 or greater.")
     endif()
